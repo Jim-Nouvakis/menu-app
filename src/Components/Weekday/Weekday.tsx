@@ -1,12 +1,17 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import "./styles.css";
 import SlotInsideWeekday from "../SlotInsideWeekday/SlotInsideWeekday";
+import Button from "../Button/Button";
 
-const Weekday: FC = () => {
+interface WeekdayProps {
+  day: string;
+}
+
+const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
   return (
     <div className={"WeekdayWrapper"}>
       <div className={"day"}>
-        <p>Δευτέρα</p>
+        <p>{day}</p>
       </div>
       <SlotInsideWeekday
         mealName={"ΠΡΩΙΝΟ"}
@@ -24,6 +29,7 @@ const Weekday: FC = () => {
         mealName={"ΒΡΑΔΙΝΟ"}
         foodsForTheMeal={[{ text: "food" }]}
       />
+      <Button />
     </div>
   );
 };

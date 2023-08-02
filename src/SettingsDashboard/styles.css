@@ -1,0 +1,4 @@
+.settingsWrapper {
+    flex: 1;
+    background: var(--lightGray);
+}

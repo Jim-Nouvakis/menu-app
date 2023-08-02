@@ -14,8 +14,7 @@
     text-align: center;
     box-sizing: border-box;
     height: 100vh;
-    width: 100%;
-    padding: 50px;
-    display: flow;
+    display: flex;
+    justify-content: space-between;
     flex-direction: row;
 }

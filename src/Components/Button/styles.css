@@ -1,0 +1,12 @@
+.totalButton {
+    padding: 15px 30px;
+    width: 100%;
+    border-radius: 20px;
+    background: var(--lightRed);
+    color: white;
+    box-shadow: none;
+    border: none;
+    font-weight: bold;
+    font-size: var(--med-font);
+    text-decoration: none;
+}

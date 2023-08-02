@@ -1,8 +1,9 @@
 .WeekdayWrapper {
     border: 1px black solid;
-    height: 100%;
     border-radius: 20px;
     padding: 15px 30px 30px 30px;
+    margin: 15px 10px 15px 10px;
+    width: 1000px;
 }
 
 .day {
