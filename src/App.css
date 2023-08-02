@@ -1,10 +1,21 @@
+:root {
+    --darkGreen: #244342;
+    --lightGray: #e8edf9;
+    --lightRed: #ff5858;
+    --darkGray: #8f939d;
+    --lightGreen: #61a98d;
+    --big-font: 28px;
+    --med-font: 22px;
+    --small-font: 18px;
+
+}
+
 .App {
-  text-align: center;
-  box-sizing: border-box;
-  height: 100vh;
-  width: 100%;
-  border: 1px solid;
-  padding: 50px;
-display: flow;
-  flex-direction: row;
+    text-align: center;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    padding: 50px;
+    display: flow;
+    flex-direction: row;
 }

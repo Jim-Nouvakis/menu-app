@@ -1,0 +1,28 @@
+.innerWeekdayDiv {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 30px;
+    border: 1px solid black;
+    margin: 10px 0;
+    border-radius: 20px;
+    position: relative;
+
+}
+
+.timeTitle {
+    color: #8f939d;
+    margin: 0;
+    font-size: var(--big-font);
+    text-align: left;
+}
+
+.infoDiv {
+    margin: 0;
+    padding: 0;
+}
+
+.foodTitle {
+    margin: 0;
+    font-size: var(--small-font);
+    text-align: left;
+}

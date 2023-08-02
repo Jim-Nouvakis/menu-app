@@ -1,3 +1,17 @@
-.WeekdayWrapper{
+.WeekdayWrapper {
+    border: 1px black solid;
+    height: 100%;
+    border-radius: 20px;
+    padding: 15px 30px 30px 30px;
+}
 
+.day {
+    color: black;
+    font-size: var(--big-font);
+    font-weight: bold;
+}
+
+.day p {
+    padding: 0;
+    margin: 0 0 15px 0;
 }
