@@ -2,22 +2,20 @@ import React from "react";
 import "./App.css";
 import Dashboard from "./Dashboard/Dashboard";
 import SettingsDashboard from "./SettingsDashboard/SettingsDashboard";
-import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { incremented } from "./features/counter/counter-slice";
+import ModalWrapper from "./Components/ModalWrapper/ModalWrapper";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/de";
 
 function App() {
-  const count = useAppSelector((state) => state.counter.value);
-  const dispatch = useAppDispatch();
   return (
-    <div className={"App"}>
-      <button
-        onClick={() => {
-          dispatch(incremented());
-        }}
-      />
-      <Dashboard />
-      <SettingsDashboard />
-    </div>
+    <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
+      <div className={"App"}>
+        <Dashboard />
+        <SettingsDashboard />
+        <ModalWrapper />
+      </div>
+    </LocalizationProvider>
   );
 }
 

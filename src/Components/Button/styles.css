@@ -1,7 +1,7 @@
-.totalButton {
+.button {
     padding: 15px 30px;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
     background: var(--lightRed);
     color: white;
     box-shadow: none;
@@ -9,4 +9,5 @@
     font-weight: bold;
     font-size: var(--med-font);
     text-decoration: none;
+    cursor: pointer;
 }

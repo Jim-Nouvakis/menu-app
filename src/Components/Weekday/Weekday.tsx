@@ -2,12 +2,16 @@ import React, { FC } from "react";
 import "./styles.css";
 import SlotInsideWeekday from "../SlotInsideWeekday/SlotInsideWeekday";
 import Button from "../Button/Button";
+import { useAppDispatch } from "../../app/hooks";
+import { toggleVisibility } from "../../features/modal/modal-slice";
 
 interface WeekdayProps {
   day: string;
 }
 
 const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className={"WeekdayWrapper"}>
       <div className={"day"}>
@@ -29,7 +33,10 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
         mealName={"ΒΡΑΔΙΝΟ"}
         foodsForTheMeal={[{ text: "food" }]}
       />
-      <Button />
+      <Button
+        onClickAction={() => dispatch(toggleVisibility(true))}
+        textInside={"Σύνολο"}
+      />
     </div>
   );
 };

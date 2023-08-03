@@ -12,6 +12,7 @@
 }
 
 .plusSpan {
+    cursor: pointer;
     text-align: center;
     width: 100%;
     color: #ffffff;

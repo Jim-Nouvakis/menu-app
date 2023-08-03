@@ -1,4 +1,5 @@
 .settingsWrapper {
     flex: 1;
     background: var(--lightGray);
+    padding: 15px;
 }
