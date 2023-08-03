@@ -6,6 +6,7 @@ import ModalWrapper from "./Components/ModalWrapper/ModalWrapper";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/de";
+import ToggleSettingsMenuButton from "./Components/ToggleSettingsMenuButton/ToggleSettingsMenuButton";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Dashboard />
         <SettingsDashboard />
         <ModalWrapper />
+        <ToggleSettingsMenuButton />
       </div>
     </LocalizationProvider>
   );

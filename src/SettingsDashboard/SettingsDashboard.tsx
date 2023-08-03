@@ -17,6 +17,7 @@ const SettingsDashboard: React.FC = () => {
       ></Button>
       <InputField placeholderText={"Αριθμός Ατόμων"} />
       <CalendarWrapper />
+      <Button textInside={"Τυχαίο Μενού"} onClickAction={() => {}} />
     </div>
   );
 };
