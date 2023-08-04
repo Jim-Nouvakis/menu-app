@@ -5,19 +5,32 @@ import { toggleVisibility } from "../features/modal/modal-slice";
 import { useAppDispatch } from "../app/hooks";
 import InputField from "../Components/InputField/InputField";
 import CalendarWrapper from "../Components/CalendarWrapper/CalendarWrapper";
+import { toggleSettingsVisibility } from "../features/settings/settings-slice";
 
 const SettingsDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
     <div className={"settingsWrapper"}>
+      <div>
+        <Button
+          classFromParent={"red smaller"}
+          textInside={"Σύνολο Εβδομάδας"}
+          onClickAction={() => dispatch(toggleVisibility(true))}
+        ></Button>
+        <InputField placeholderText={"Αριθμός Ατόμων"} />
+        <CalendarWrapper />
+        <Button
+          classFromParent={"green smaller"}
+          textInside={"Τυχαίο Μενού"}
+          onClickAction={() => {}}
+        />
+      </div>
       <Button
-        textInside={"Σύνολο Εβδομάδας"}
-        onClickAction={() => dispatch(toggleVisibility(true))}
-      ></Button>
-      <InputField placeholderText={"Αριθμός Ατόμων"} />
-      <CalendarWrapper />
-      <Button textInside={"Τυχαίο Μενού"} onClickAction={() => {}} />
+        onClickAction={() => dispatch(toggleSettingsVisibility(false))}
+        classFromParent={"black smaller"}
+        textInside={"Τέλος Ρυθμίσεων"}
+      />
     </div>
   );
 };

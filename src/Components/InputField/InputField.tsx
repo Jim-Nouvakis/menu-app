@@ -7,7 +7,7 @@ const InputField: React.FC<{ placeholderText: string }> = ({
 }) => {
   return (
     <div className={"inputField"}>
-      <TextField type="number" label={placeholderText} />
+      <TextField type="number" fullWidth={true} label={placeholderText} />
     </div>
   );
 };

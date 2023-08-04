@@ -7,15 +7,20 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/de";
 import ToggleSettingsMenuButton from "./Components/ToggleSettingsMenuButton/ToggleSettingsMenuButton";
+import { useAppSelector } from "./app/hooks";
 
 function App() {
+  const isSettingsDashboardVisible = useAppSelector(
+    (state) => state.settings.isVisible,
+  );
+
   return (
     <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
       <div className={"App"}>
         <Dashboard />
-        <SettingsDashboard />
+        {isSettingsDashboardVisible && <SettingsDashboard />}
         <ModalWrapper />
-        <ToggleSettingsMenuButton />
+        {!isSettingsDashboardVisible && <ToggleSettingsMenuButton />}
       </div>
     </LocalizationProvider>
   );

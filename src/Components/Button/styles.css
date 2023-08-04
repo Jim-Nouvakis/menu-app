@@ -2,7 +2,6 @@
     padding: 15px 30px;
     width: 100%;
     border-radius: 10px;
-    background: var(--lightRed);
     color: white;
     box-shadow: none;
     border: none;
@@ -10,4 +9,23 @@
     font-size: var(--med-font);
     text-decoration: none;
     cursor: pointer;
+}
+
+.red {
+    background: var(--lightRed);
+
+}
+
+.black {
+    background: black;
+    margin-top: 10px;
+
+}
+
+.green {
+    background: var(--darkGreen);
+}
+
+.smaller {
+    font-size: 12px;
 }

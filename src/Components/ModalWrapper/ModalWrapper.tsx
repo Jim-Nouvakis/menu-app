@@ -35,6 +35,7 @@ const ModalWrapper: React.FC = () => {
       >
         <div className={"divInsideModal"}>Hello</div>
         <Button
+          classFromParent={"red"}
           textInside={"Κλείσιμο"}
           onClickAction={() => dispatch(toggleVisibility(false))}
         />

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import "./styles.css";
 import SlotInsideWeekday from "../SlotInsideWeekday/SlotInsideWeekday";
 import Button from "../Button/Button";
@@ -36,6 +36,7 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
       <Button
         onClickAction={() => dispatch(toggleVisibility(true))}
         textInside={"Σύνολο"}
+        classFromParent={"red"}
       />
     </div>
   );
