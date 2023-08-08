@@ -1,12 +1,16 @@
-import { FC } from "react";
 import "./styles.css";
 import {
   setTypeOfModal,
   toggleVisibility,
 } from "../../features/modal/modal-slice";
 import { useAppDispatch } from "../../app/hooks";
+import React from "react";
 
-const PlusIcon: FC = () => {
+const PlusIcon: React.FC<{ onClick(): void }> = ({
+  onClick,
+}: {
+  onClick(): void;
+}) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -17,7 +21,9 @@ const PlusIcon: FC = () => {
       }}
       className={"plusIcon"}
     >
-      <span className={"plusSpan"}>+</span>
+      <span onClick={onClick} className={"plusSpan"}>
+        +
+      </span>
     </div>
   );
 };

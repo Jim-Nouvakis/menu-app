@@ -29,3 +29,7 @@
 .smaller {
     font-size: 12px;
 }
+
+.withTopMargin {
+    margin-top: 5px;
+}

@@ -6,6 +6,7 @@ import { useAppDispatch } from "../app/hooks";
 import InputField from "../Components/InputField/InputField";
 import CalendarWrapper from "../Components/CalendarWrapper/CalendarWrapper";
 import { toggleSettingsVisibility } from "../features/settings/settings-slice";
+import { resetWeeklyMenu } from "../features/foodMenu/foodMenu-slice";
 
 const SettingsDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,14 @@ const SettingsDashboard: React.FC = () => {
           classFromParent={"green smaller"}
           textInside={"Τυχαίο Μενού"}
           onClickAction={() => {}}
+        />
+        <Button
+          classFromParent={"red smaller withTopMargin"}
+          textInside={"Καθαρισμός Μενού"}
+          onClickAction={() => {
+            localStorage.removeItem("weeklyMenu");
+            dispatch(resetWeeklyMenu());
+          }}
         />
       </div>
       <Button

@@ -11,7 +11,7 @@
 
 .timeTitle {
     color: #8f939d;
-    margin: 0;
+    margin: 0 30px 0 0;
     font-size: var(--big-font);
     text-align: left;
 }

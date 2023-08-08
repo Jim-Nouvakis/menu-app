@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { toggleVisibility } from "../../features/modal/modal-slice";
 import Button from "../Button/Button";
 import "./styles.css";
+import { addFoodToDayAndTime } from "../../features/foodMenu/foodMenu-slice";
 
 const ModalWrapper: React.FC = () => {
   const [mainCategories, setMainCategories] = useState<string[]>([]);
@@ -104,6 +105,14 @@ const ModalWrapper: React.FC = () => {
                   className={"listItem"}
                   onClick={() => {
                     dispatch(toggleVisibility(false));
+                    dispatch(
+                      addFoodToDayAndTime({
+                        name: recipe,
+                        recipe:
+                          // @ts-ignore
+                          menu[selectedCategory][selectedSubCategory][recipe],
+                      }),
+                    );
                   }}
                 >
                   {recipe}

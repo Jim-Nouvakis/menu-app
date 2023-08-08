@@ -10,7 +10,10 @@ const Button: React.FC<{
     | "green"
     | "red smaller"
     | "black smaller"
-    | "green smaller";
+    | "green smaller"
+    | "red smaller withTopMargin"
+    | "black smaller withTopMargin"
+    | "green smaller withTopMargin";
 }> = ({
   textInside,
   onClickAction,
@@ -24,7 +27,10 @@ const Button: React.FC<{
     | "green"
     | "red smaller"
     | "black smaller"
-    | "green smaller";
+    | "green smaller"
+    | "red smaller withTopMargin"
+    | "black smaller withTopMargin"
+    | "green smaller withTopMargin";
 }) => {
   return (
     <button

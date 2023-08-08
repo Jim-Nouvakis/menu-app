@@ -1,21 +1,22 @@
 import React, { FC } from "react";
 import "./styles.css";
 import Weekday from "../Components/Weekday/Weekday";
+import { WeekdaysInterface } from "../interfaces";
 
 const Dashboard: FC = () => {
-  const weekdays: string[] = [
-    "ΔΕΥΤΕΡΑ",
-    "ΤΡΙΤΗ",
-    "ΤΕΤΑΡΤΗ",
-    "ΠΕΜΠΤΗ",
-    "ΠΑΡΑΣΚΕΥΗ",
-    "ΣΑΒΒΑΤΟ",
-    "ΚΥΡΙΑΚΗ",
+  const weekdays: WeekdaysInterface["day"][] = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
   ];
   return (
     <div className={"dashboardWrapper"}>
-      {weekdays.map((day) => (
-        <Weekday day={day} />
+      {weekdays.map((day, index) => (
+        <Weekday key={index} day={day} />
       ))}
     </div>
   );
