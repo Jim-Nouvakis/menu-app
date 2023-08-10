@@ -1,0 +1,17 @@
+
+.icon {
+    margin: 0 0 0 5px;
+    font-size: 13px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}

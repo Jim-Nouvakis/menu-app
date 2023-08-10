@@ -23,6 +23,19 @@
 
 .foodTitle {
     margin: 0;
+
     font-size: var(--small-font);
     text-align: left;
+}
+
+.iconsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.foodDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

@@ -73,10 +73,28 @@ const foodMenuSlice = createSlice({
       state.weekDaysWithItsLaunchTimes =
         initialState.weekDaysWithItsLaunchTimes;
     },
+    removeFood(
+      state,
+      action: PayloadAction<{
+        day: WeekdaysInterface["day"];
+        typeOfMeal: TypeOfLaunchInterface["typeOfLaunch"];
+        recipe: string;
+      }>,
+    ) {
+      // @ts-ignore
+      delete state.weekDaysWithItsLaunchTimes[action.payload.day][
+        action.payload.typeOfMeal
+      ][action.payload.recipe];
+      localStorage.setItem(
+        "weeklyMenu",
+        JSON.stringify(state.weekDaysWithItsLaunchTimes),
+      );
+    },
   },
 });
 
 export const {
+  removeFood,
   resetWeeklyMenu,
   setWeeklyMenu,
   setSelectedDayAndTime,

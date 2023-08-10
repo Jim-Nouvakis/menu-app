@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import PlusIcon from "../PlusIcon/PlusIcon";
 import "./styles.css";
-import { setSelectedDayAndTime } from "../../features/foodMenu/foodMenu-slice";
+import {
+  removeFood,
+  setSelectedDayAndTime,
+} from "../../features/foodMenu/foodMenu-slice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { TypeOfLaunchInterface, WeekdaysInterface } from "../../interfaces";
+import IconWithToolTip from "../IconWithToolTip/IconWithToolTip";
 
 interface SlotProps {
   mealName: TypeOfLaunchInterface["typeOfLaunch"];
@@ -20,6 +24,7 @@ const SlotInsideWeekday: React.FC<SlotProps> = ({
   const foodsInsideSlot = useAppSelector(
     (state) => state.menu.weekDaysWithItsLaunchTimes[weekday][mealName],
   );
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className={"innerWeekdayDiv"}>
       <div className={"infoDiv"}>
@@ -35,7 +40,38 @@ const SlotInsideWeekday: React.FC<SlotProps> = ({
             : mealName}
         </p>
         {Object.keys(foodsInsideSlot).map((food) => (
-          <p className={"foodTitle"}>{food}</p>
+          <div
+            onMouseLeave={() => {
+              setIsHovered(false);
+            }}
+            onMouseOver={() => setIsHovered(true)}
+            className={"foodDiv"}
+          >
+            <p className={"foodTitle"}>{food}</p>
+            {isHovered && (
+              <div className={"iconsContainer"}>
+                <IconWithToolTip
+                  textInside={"X"}
+                  tooltipText={"Διαγραφή"}
+                  onPress={() => {
+                    dispatch(
+                      removeFood({
+                        day: weekday,
+                        typeOfMeal: mealName,
+                        recipe: food,
+                      }),
+                    );
+                  }}
+                  backgroundColorOfIcon={"#FF5858FF"}
+                />
+                <IconWithToolTip
+                  textInside={"i"}
+                  tooltipText={"Πληροφορίες Φαγητού"}
+                  backgroundColorOfIcon={"#4666ac"}
+                />
+              </div>
+            )}
+          </div>
         ))}
       </div>
       <PlusIcon

@@ -15,45 +15,47 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
 
   return (
     <div className={"WeekdayWrapper"}>
-      <div className={"day"}>
-        <p>
-          {day === "Monday"
-            ? "ΔΕΥΤΕΡΑ"
-            : day === "Tuesday"
-            ? "ΤΡΙΤΗ"
-            : day === "Wednesday"
-            ? "ΤΕΤΑΡΤΗ"
-            : day === "Thursday"
-            ? "ΠΕΜΠΤΗ"
-            : day === "Friday"
-            ? "ΠΑΡΑΣΚΕΥΗ"
-            : day === "Saturday"
-            ? "ΣΑΒΒΑΤΟ"
-            : day === "Sunday"
-            ? "ΚΥΡΙΑΚΗ"
-            : ""}
-        </p>
+      <div>
+        <div className={"day"}>
+          <p>
+            {day === "Monday"
+              ? "ΔΕΥΤΕΡΑ"
+              : day === "Tuesday"
+              ? "ΤΡΙΤΗ"
+              : day === "Wednesday"
+              ? "ΤΕΤΑΡΤΗ"
+              : day === "Thursday"
+              ? "ΠΕΜΠΤΗ"
+              : day === "Friday"
+              ? "ΠΑΡΑΣΚΕΥΗ"
+              : day === "Saturday"
+              ? "ΣΑΒΒΑΤΟ"
+              : day === "Sunday"
+              ? "ΚΥΡΙΑΚΗ"
+              : ""}
+          </p>
+        </div>
+        <SlotInsideWeekday
+          weekday={day}
+          mealName={"breakfast"}
+          foodsForTheMeal={[{ text: "food" }]}
+        />
+        <SlotInsideWeekday
+          weekday={day}
+          mealName={"launch"}
+          foodsForTheMeal={[{ text: "food" }]}
+        />
+        <SlotInsideWeekday
+          weekday={day}
+          mealName={"snack"}
+          foodsForTheMeal={[{ text: "food" }]}
+        />
+        <SlotInsideWeekday
+          weekday={day}
+          mealName={"dinner"}
+          foodsForTheMeal={[{ text: "food" }]}
+        />
       </div>
-      <SlotInsideWeekday
-        weekday={day}
-        mealName={"breakfast"}
-        foodsForTheMeal={[{ text: "food" }]}
-      />
-      <SlotInsideWeekday
-        weekday={day}
-        mealName={"launch"}
-        foodsForTheMeal={[{ text: "food" }]}
-      />
-      <SlotInsideWeekday
-        weekday={day}
-        mealName={"snack"}
-        foodsForTheMeal={[{ text: "food" }]}
-      />
-      <SlotInsideWeekday
-        weekday={day}
-        mealName={"dinner"}
-        foodsForTheMeal={[{ text: "food" }]}
-      />
       <Button
         onClickAction={() => dispatch(toggleVisibility(true))}
         textInside={"Σύνολο"}
