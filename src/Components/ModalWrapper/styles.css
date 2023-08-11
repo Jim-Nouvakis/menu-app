@@ -7,6 +7,16 @@
     height: 100%;
 }
 
+.recipeTitle {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ingredient {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
 .listItem {
     cursor: pointer;
     border: 1px solid black;

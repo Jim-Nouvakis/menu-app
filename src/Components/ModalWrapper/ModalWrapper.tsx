@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Modal } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { toggleVisibility } from "../../features/modal/modal-slice";
+import { toggleVisibilityOfModal } from "../../features/modal/modal-slice";
 import Button from "../Button/Button";
 import "./styles.css";
 import { addFoodToDayAndTime } from "../../features/foodMenu/foodMenu-slice";
@@ -14,13 +14,15 @@ const ModalWrapper: React.FC = () => {
   );
   const isVisible = useAppSelector((state) => state.modal.isVisible);
   const menu = useAppSelector((state) => state.menu.menu);
+  const requestedInfoAboutARecipe = useAppSelector(
+    (state) => state.menu.requestedInfoAboutARecipe,
+  );
   const typeOfModal = useAppSelector((state) => state.modal.typeOfModal);
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     if (typeOfModal === "menu") {
       {
-        Object.keys(menu).forEach((item) => {
+        Object?.keys(menu).forEach((item) => {
           if (!mainCategories.includes(item))
             setMainCategories([...mainCategories, item]);
         });
@@ -44,7 +46,10 @@ const ModalWrapper: React.FC = () => {
   }, [isVisible]);
 
   return (
-    <Modal onClose={() => dispatch(toggleVisibility(false))} open={isVisible}>
+    <Modal
+      onClose={() => dispatch(toggleVisibilityOfModal(false))}
+      open={isVisible}
+    >
       <Box
         sx={{
           width: 300,
@@ -62,9 +67,6 @@ const ModalWrapper: React.FC = () => {
           padding: "30px",
         }}
       >
-        {typeOfModal !== "menu" && (
-          <div className={"divInsideModal"}>Hello</div>
-        )}
         {typeOfModal === "menu" && (
           <div className={"divInsideModal"}>
             {!selectedCategory &&
@@ -104,7 +106,7 @@ const ModalWrapper: React.FC = () => {
                   key={index}
                   className={"listItem"}
                   onClick={() => {
-                    dispatch(toggleVisibility(false));
+                    dispatch(toggleVisibilityOfModal(false));
                     dispatch(
                       addFoodToDayAndTime({
                         name: recipe,
@@ -120,10 +122,33 @@ const ModalWrapper: React.FC = () => {
               ))}
           </div>
         )}
+        {typeOfModal === "recipeInfo" && (
+          <div className={"divInsideModal"}>
+            <p className={"recipeTitle"}>
+              {Object?.keys(requestedInfoAboutARecipe)}
+            </p>
+            {Object?.keys(
+              requestedInfoAboutARecipe?.[
+                Object?.keys(
+                  requestedInfoAboutARecipe,
+                ) as keyof typeof requestedInfoAboutARecipe
+              ],
+            )?.map((ing, index) => (
+              <p key={index} className={"ingredient"}>
+                {`${ing} : ${//@ts-ignore
+                requestedInfoAboutARecipe?.[
+                  Object?.keys(
+                    requestedInfoAboutARecipe,
+                  ) as keyof typeof requestedInfoAboutARecipe
+                ]?.[ing]}γρ.`}
+              </p>
+            ))}
+          </div>
+        )}
         <Button
           classFromParent={"red"}
           textInside={"Κλείσιμο"}
-          onClickAction={() => dispatch(toggleVisibility(false))}
+          onClickAction={() => dispatch(toggleVisibilityOfModal(false))}
         />
       </Box>
     </Modal>

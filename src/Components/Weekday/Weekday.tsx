@@ -3,7 +3,10 @@ import "./styles.css";
 import SlotInsideWeekday from "../SlotInsideWeekday/SlotInsideWeekday";
 import Button from "../Button/Button";
 import { useAppDispatch } from "../../app/hooks";
-import { toggleVisibility } from "../../features/modal/modal-slice";
+import {
+  setTypeOfModal,
+  toggleVisibilityOfModal,
+} from "../../features/modal/modal-slice";
 import { WeekdaysInterface } from "../../interfaces";
 
 interface WeekdayProps {
@@ -57,7 +60,10 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
         />
       </div>
       <Button
-        onClickAction={() => dispatch(toggleVisibility(true))}
+        onClickAction={() => {
+          dispatch(setTypeOfModal("totalOfDay"));
+          dispatch(toggleVisibilityOfModal(true));
+        }}
         textInside={"Σύνολο"}
         classFromParent={"red"}
       />

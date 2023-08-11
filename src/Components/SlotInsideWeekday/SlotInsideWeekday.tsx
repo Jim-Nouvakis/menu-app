@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import PlusIcon from "../PlusIcon/PlusIcon";
 import "./styles.css";
 import {
+  getInfoAboutTheFoodThatWasSelected,
   removeFood,
   setSelectedDayAndTime,
 } from "../../features/foodMenu/foodMenu-slice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { TypeOfLaunchInterface, WeekdaysInterface } from "../../interfaces";
 import IconWithToolTip from "../IconWithToolTip/IconWithToolTip";
+import {
+  setTypeOfModal,
+  toggleVisibilityOfModal,
+} from "../../features/modal/modal-slice";
 
 interface SlotProps {
   mealName: TypeOfLaunchInterface["typeOfLaunch"];
@@ -39,8 +44,9 @@ const SlotInsideWeekday: React.FC<SlotProps> = ({
             ? "ΒΡΑΔΙΝΟ"
             : mealName}
         </p>
-        {Object.keys(foodsInsideSlot).map((food) => (
+        {Object.keys(foodsInsideSlot).map((food, index) => (
           <div
+            key={index}
             onMouseLeave={() => {
               setIsHovered(false);
             }}
@@ -66,6 +72,17 @@ const SlotInsideWeekday: React.FC<SlotProps> = ({
                 />
                 <IconWithToolTip
                   textInside={"i"}
+                  onPress={() => {
+                    dispatch(toggleVisibilityOfModal(true));
+                    dispatch(setTypeOfModal("recipeInfo"));
+                    dispatch(
+                      getInfoAboutTheFoodThatWasSelected({
+                        day: weekday,
+                        typeOfMeal: mealName,
+                        recipe: food,
+                      }),
+                    );
+                  }}
                   tooltipText={"Πληροφορίες Φαγητού"}
                   backgroundColorOfIcon={"#4666ac"}
                 />

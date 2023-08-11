@@ -1,7 +1,7 @@
 import "./styles.css";
 import {
   setTypeOfModal,
-  toggleVisibility,
+  toggleVisibilityOfModal,
 } from "../../features/modal/modal-slice";
 import { useAppDispatch } from "../../app/hooks";
 import React from "react";
@@ -16,7 +16,7 @@ const PlusIcon: React.FC<{ onClick(): void }> = ({
   return (
     <div
       onClick={() => {
-        dispatch(toggleVisibility(true));
+        dispatch(toggleVisibilityOfModal(true));
         dispatch(setTypeOfModal("menu"));
       }}
       className={"plusIcon"}

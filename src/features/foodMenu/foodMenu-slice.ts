@@ -20,6 +20,7 @@ interface FoodMenuState {
     day: WeekdaysInterface["day"];
     launch: TypeOfLaunchInterface["typeOfLaunch"];
   };
+  requestedInfoAboutARecipe: {};
 }
 
 const initialState: FoodMenuState = {
@@ -35,6 +36,7 @@ const initialState: FoodMenuState = {
     Sunday: { breakfast: {}, launch: {}, snack: {}, dinner: {} },
   },
   selectedDayAndTime: { day: "Monday", launch: "breakfast" },
+  requestedInfoAboutARecipe: {},
 };
 
 const foodMenuSlice = createSlice({
@@ -90,10 +92,29 @@ const foodMenuSlice = createSlice({
         JSON.stringify(state.weekDaysWithItsLaunchTimes),
       );
     },
+    getInfoAboutTheFoodThatWasSelected(
+      state,
+      action: PayloadAction<{
+        day: WeekdaysInterface["day"];
+        typeOfMeal: TypeOfLaunchInterface["typeOfLaunch"];
+        recipe: string;
+      }>,
+    ) {
+      let newObj = {};
+      // @ts-ignore
+      newObj[action.payload.recipe] = {
+        // @ts-ignore
+        ...state.weekDaysWithItsLaunchTimes[action.payload.day][
+          action.payload.typeOfMeal
+        ][action.payload.recipe],
+      };
+      state.requestedInfoAboutARecipe = newObj;
+    },
   },
 });
 
 export const {
+  getInfoAboutTheFoodThatWasSelected,
   removeFood,
   resetWeeklyMenu,
   setWeeklyMenu,
