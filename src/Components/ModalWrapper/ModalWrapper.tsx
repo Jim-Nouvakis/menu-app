@@ -5,6 +5,9 @@ import { toggleVisibilityOfModal } from "../../features/modal/modal-slice";
 import Button from "../Button/Button";
 import "./styles.css";
 import { addFoodToDayAndTime } from "../../features/foodMenu/foodMenu-slice";
+import ConstructNewObjectWithTheTotalOfAllIngredientsOfTheDayOrWeek, {
+  returnNameOfDayInGreek,
+} from "../../utils";
 
 const ModalWrapper: React.FC = () => {
   const [mainCategories, setMainCategories] = useState<string[]>([]);
@@ -17,6 +20,12 @@ const ModalWrapper: React.FC = () => {
   const requestedInfoAboutARecipe = useAppSelector(
     (state) => state.menu.requestedInfoAboutARecipe,
   );
+  const selectedDayToGetTotalsOfIngredients = useAppSelector(
+    (state) => state.menu.selectedDayForTotalOfIngredients,
+  );
+  const totalsOfDay =
+    ConstructNewObjectWithTheTotalOfAllIngredientsOfTheDayOrWeek();
+
   const typeOfModal = useAppSelector((state) => state.modal.typeOfModal);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -29,14 +38,6 @@ const ModalWrapper: React.FC = () => {
       }
     }
   }, [typeOfModal]);
-
-  useEffect(() => {
-    if (selectedCategory) {
-      Object?.keys(menu[selectedCategory as keyof typeof menu])?.map(
-        (category) => console.log(category),
-      );
-    }
-  }, [selectedCategory]);
 
   useEffect(() => {
     if (!isVisible) {
@@ -142,6 +143,19 @@ const ModalWrapper: React.FC = () => {
                   ) as keyof typeof requestedInfoAboutARecipe
                 ]?.[ing]}γρ.`}
               </p>
+            ))}
+          </div>
+        )}
+        {typeOfModal === "totalOfDay" && (
+          <div className={"divInsideModal"}>
+            <p className={"recipeTitle"}>
+              ΣΥΝΟΛΟ ΥΛΙΚΩΝ -{" "}
+              {returnNameOfDayInGreek(selectedDayToGetTotalsOfIngredients)}
+            </p>
+            {Object.keys(totalsOfDay).map((ing, index) => (
+              <p key={index} className={"ingredient"}>{`${ing} = ${
+                totalsOfDay[ing as keyof typeof totalsOfDay]
+              }γρ`}</p>
             ))}
           </div>
         )}

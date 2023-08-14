@@ -8,6 +8,8 @@ import {
   toggleVisibilityOfModal,
 } from "../../features/modal/modal-slice";
 import { WeekdaysInterface } from "../../interfaces";
+import { setSelectedDayForTotal } from "../../features/foodMenu/foodMenu-slice";
+import { returnNameOfDayInGreek } from "../../utils";
 
 interface WeekdayProps {
   day: WeekdaysInterface["day"];
@@ -20,23 +22,7 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
     <div className={"WeekdayWrapper"}>
       <div>
         <div className={"day"}>
-          <p>
-            {day === "Monday"
-              ? "ΔΕΥΤΕΡΑ"
-              : day === "Tuesday"
-              ? "ΤΡΙΤΗ"
-              : day === "Wednesday"
-              ? "ΤΕΤΑΡΤΗ"
-              : day === "Thursday"
-              ? "ΠΕΜΠΤΗ"
-              : day === "Friday"
-              ? "ΠΑΡΑΣΚΕΥΗ"
-              : day === "Saturday"
-              ? "ΣΑΒΒΑΤΟ"
-              : day === "Sunday"
-              ? "ΚΥΡΙΑΚΗ"
-              : ""}
-          </p>
+          <p>{returnNameOfDayInGreek(day)}</p>
         </div>
         <SlotInsideWeekday
           weekday={day}
@@ -61,6 +47,7 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
       </div>
       <Button
         onClickAction={() => {
+          dispatch(setSelectedDayForTotal(day));
           dispatch(setTypeOfModal("totalOfDay"));
           dispatch(toggleVisibilityOfModal(true));
         }}

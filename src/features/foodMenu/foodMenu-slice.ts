@@ -16,6 +16,7 @@ interface FoodMenuState {
     Saturday: { breakfast: {}; launch: {}; snack: {}; dinner: {} };
     Sunday: { breakfast: {}; launch: {}; snack: {}; dinner: {} };
   };
+  selectedDayForTotalOfIngredients: WeekdaysInterface["day"] | "week" | null;
   selectedDayAndTime: {
     day: WeekdaysInterface["day"];
     launch: TypeOfLaunchInterface["typeOfLaunch"];
@@ -24,7 +25,7 @@ interface FoodMenuState {
 }
 
 const initialState: FoodMenuState = {
-  settingsForMenu: { numberOfPeople: 0, daySelected: null },
+  settingsForMenu: { numberOfPeople: 15, daySelected: null },
   menu: { Ροφήματα: { Καφέδες: {} } },
   weekDaysWithItsLaunchTimes: {
     Monday: { breakfast: {}, launch: {}, snack: {}, dinner: {} },
@@ -36,6 +37,7 @@ const initialState: FoodMenuState = {
     Sunday: { breakfast: {}, launch: {}, snack: {}, dinner: {} },
   },
   selectedDayAndTime: { day: "Monday", launch: "breakfast" },
+  selectedDayForTotalOfIngredients: null,
   requestedInfoAboutARecipe: {},
 };
 
@@ -92,6 +94,15 @@ const foodMenuSlice = createSlice({
         JSON.stringify(state.weekDaysWithItsLaunchTimes),
       );
     },
+    setSelectedDayForTotal(
+      state,
+      action: PayloadAction<FoodMenuState["selectedDayForTotalOfIngredients"]>,
+    ) {
+      state.selectedDayForTotalOfIngredients = action.payload;
+    },
+    setNumberOfPeople(state, action: PayloadAction<number>) {
+      state.settingsForMenu.numberOfPeople = action.payload;
+    },
     getInfoAboutTheFoodThatWasSelected(
       state,
       action: PayloadAction<{
@@ -114,6 +125,8 @@ const foodMenuSlice = createSlice({
 });
 
 export const {
+  setNumberOfPeople,
+  setSelectedDayForTotal,
   getInfoAboutTheFoodThatWasSelected,
   removeFood,
   resetWeeklyMenu,
