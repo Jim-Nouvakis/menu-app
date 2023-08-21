@@ -11,6 +11,7 @@ import { useAppSelector } from "./app/hooks";
 import { useDispatch } from "react-redux";
 import { parseMenu, setWeeklyMenu } from "./features/foodMenu/foodMenu-slice";
 import foods from "./foods.json";
+import DocumentGenerator from "./Components/DocumentGenerator/DocumentGenerator";
 
 function App() {
   const isSettingsDashboardVisible = useAppSelector(
@@ -32,10 +33,11 @@ function App() {
   return (
     <LocalizationProvider adapterLocale="el" dateAdapter={AdapterDayjs}>
       <div className={"App"}>
-        <Dashboard />
-        {isSettingsDashboardVisible && <SettingsDashboard />}
-        <ModalWrapper />
-        {!isSettingsDashboardVisible && <ToggleSettingsMenuButton />}
+        {/*<Dashboard />*/}
+        {/*{isSettingsDashboardVisible && <SettingsDashboard />}*/}
+        {/*<ModalWrapper />*/}
+        {/*{!isSettingsDashboardVisible && <ToggleSettingsMenuButton />}*/}
+        <DocumentGenerator />
       </div>
     </LocalizationProvider>
   );

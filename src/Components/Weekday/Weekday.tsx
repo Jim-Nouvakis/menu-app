@@ -24,26 +24,10 @@ const Weekday: React.FC<WeekdayProps> = ({ day }: WeekdayProps) => {
         <div className={"day"}>
           <p>{returnNameOfDayInGreek(day)}</p>
         </div>
-        <SlotInsideWeekday
-          weekday={day}
-          mealName={"breakfast"}
-          foodsForTheMeal={[{ text: "food" }]}
-        />
-        <SlotInsideWeekday
-          weekday={day}
-          mealName={"launch"}
-          foodsForTheMeal={[{ text: "food" }]}
-        />
-        <SlotInsideWeekday
-          weekday={day}
-          mealName={"snack"}
-          foodsForTheMeal={[{ text: "food" }]}
-        />
-        <SlotInsideWeekday
-          weekday={day}
-          mealName={"dinner"}
-          foodsForTheMeal={[{ text: "food" }]}
-        />
+        <SlotInsideWeekday weekday={day} mealName={"breakfast"} />
+        <SlotInsideWeekday weekday={day} mealName={"launch"} />
+        <SlotInsideWeekday weekday={day} mealName={"snack"} />
+        <SlotInsideWeekday weekday={day} mealName={"dinner"} />
       </div>
       <Button
         onClickAction={() => {

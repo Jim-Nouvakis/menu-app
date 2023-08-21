@@ -16,13 +16,11 @@ import {
 
 interface SlotProps {
   mealName: TypeOfLaunchInterface["typeOfLaunch"];
-  foodsForTheMeal: {}[];
   weekday: WeekdaysInterface["day"];
 }
 
 const SlotInsideWeekday: React.FC<SlotProps> = ({
   mealName,
-  foodsForTheMeal,
   weekday,
 }: SlotProps) => {
   const dispatch = useAppDispatch();
