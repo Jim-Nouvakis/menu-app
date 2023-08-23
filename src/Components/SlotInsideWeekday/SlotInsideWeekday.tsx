@@ -27,7 +27,7 @@ const SlotInsideWeekday: React.FC<SlotProps> = ({
   const foodsInsideSlot = useAppSelector(
     (state) => state.menu.weekDaysWithItsLaunchTimes[weekday][mealName],
   );
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState<number | null>(null);
   return (
     <div className={"innerWeekdayDiv"}>
       <div className={"infoDiv"}>
@@ -45,14 +45,15 @@ const SlotInsideWeekday: React.FC<SlotProps> = ({
         {Object.keys(foodsInsideSlot).map((food, index) => (
           <div
             key={index}
-            onMouseLeave={() => {
-              setIsHovered(false);
-            }}
-            onMouseOver={() => setIsHovered(true)}
             className={"foodDiv"}
+            onMouseLeave={() => {
+              setIsHovered(null);
+            }}
           >
-            <p className={"foodTitle"}>{food}</p>
-            {isHovered && (
+            <p className={"foodTitle"} onMouseOver={() => setIsHovered(index)}>
+              {food}
+            </p>
+            {index === isHovered && (
               <div className={"iconsContainer"}>
                 <IconWithToolTip
                   textInside={"X"}

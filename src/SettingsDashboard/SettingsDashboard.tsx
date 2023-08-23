@@ -8,7 +8,11 @@ import {
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import InputField from "../Components/InputField/InputField";
 import CalendarWrapper from "../Components/CalendarWrapper/CalendarWrapper";
-import { toggleSettingsVisibility } from "../features/settings/settings-slice";
+import {
+  setDateFromRange,
+  setDateToRange,
+  toggleSettingsVisibility,
+} from "../features/settings/settings-slice";
 import {
   resetWeeklyMenu,
   setSelectedDayForTotal,
@@ -20,6 +24,8 @@ const SettingsDashboard: React.FC = () => {
   const isPdfGeneratorVisible = useAppSelector(
     (state) => state.pdfGenerator.isVisible,
   );
+  const menuDateFrom = useAppSelector((state) => state.settings.menuFromDate);
+  const menuDateTo = useAppSelector((state) => state.settings.menuToDate);
   return (
     <div className={"settingsWrapper"}>
       <div>
@@ -35,7 +41,37 @@ const SettingsDashboard: React.FC = () => {
               }}
             ></Button>
             <InputField placeholderText={"Αριθμός Ατόμων"} />
-            <CalendarWrapper />
+            <CalendarWrapper
+              onSelectDate={(e) => {
+                dispatch(setDateFromRange(e));
+              }}
+              innerText={"Επιλογή Ημ/νίας Από"}
+            />
+            <CalendarWrapper
+              onSelectDate={(e) => {
+                dispatch(setDateToRange(e));
+              }}
+              innerText={"Επιλογή Ημ/νίας Έως"}
+            />
+            <p
+              style={{
+                margin: "0 0 5px 0",
+                fontWeight: "bold",
+                fontSize: 18,
+              }}
+            >
+              Επιλεγμένες Ημερομηνίες:
+            </p>
+            <p
+              style={{
+                margin: "0 0 10px 0",
+                fontWeight: "bold",
+                fontSize: 16,
+              }}
+            >
+              {menuDateFrom} έως {menuDateTo}
+            </p>
+
             <Button
               classFromParent={"red smaller"}
               textInside={"Καθαρισμός Μενού"}

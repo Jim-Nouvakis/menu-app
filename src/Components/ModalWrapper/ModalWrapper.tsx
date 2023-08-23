@@ -12,9 +12,6 @@ import ConstructNewObjectWithTheTotalOfAllIngredientsOfTheDayOrWeek, {
 const ModalWrapper: React.FC = () => {
   const [mainCategories, setMainCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(
-    null,
-  );
   const isVisible = useAppSelector((state) => state.modal.isVisible);
   const menu = useAppSelector((state) => state.menu.menu);
   const requestedInfoAboutARecipe = useAppSelector(
@@ -41,7 +38,6 @@ const ModalWrapper: React.FC = () => {
 
   useEffect(() => {
     if (!isVisible) {
-      setSelectedSubCategory(null);
       setSelectedCategory(null);
     }
   }, [isVisible]);
@@ -83,44 +79,27 @@ const ModalWrapper: React.FC = () => {
                 </div>
               ))}
             {selectedCategory &&
-              !selectedSubCategory &&
               Object?.keys(menu[selectedCategory as keyof typeof menu])?.map(
-                (category, index) => (
+                (recipe, index) => (
                   <div
                     key={index}
                     className={"listItem"}
                     onClick={() => {
-                      setSelectedSubCategory(category);
+                      dispatch(toggleVisibilityOfModal(false));
+                      dispatch(
+                        addFoodToDayAndTime({
+                          name: recipe,
+                          recipe:
+                            // @ts-ignore
+                            menu[selectedCategory][recipe],
+                        }),
+                      );
                     }}
                   >
-                    {category}
+                    {recipe}
                   </div>
                 ),
               )}
-            {selectedSubCategory &&
-              Object?.keys(
-                menu[selectedCategory as keyof typeof menu][
-                  selectedSubCategory as keyof typeof selectedCategory
-                ],
-              )?.map((recipe, index) => (
-                <div
-                  key={index}
-                  className={"listItem"}
-                  onClick={() => {
-                    dispatch(toggleVisibilityOfModal(false));
-                    dispatch(
-                      addFoodToDayAndTime({
-                        name: recipe,
-                        recipe:
-                          // @ts-ignore
-                          menu[selectedCategory][selectedSubCategory][recipe],
-                      }),
-                    );
-                  }}
-                >
-                  {recipe}
-                </div>
-              ))}
           </div>
         )}
         {typeOfModal === "recipeInfo" && (

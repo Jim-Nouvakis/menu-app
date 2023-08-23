@@ -1,10 +1,26 @@
 import React from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 
-const CalendarWrapper: React.FC = () => {
+interface CalendarInterface {
+  innerText: string;
+  onSelectDate: (e: any) => void;
+}
+
+const CalendarWrapper: React.FC<CalendarInterface> = ({
+  innerText,
+  onSelectDate,
+}: CalendarInterface) => {
   return (
-    <div style={{ marginBottom: "10px" }}>
-      <DatePicker format="DD/MM/YYYY" label={"Επιλογή Ημ/νίας"} />
+    <div>
+      <DatePicker
+        onAccept={(e) => {
+          //@ts-ignore
+          if (e) onSelectDate(`${e?.$D}-${parseInt(e.$M) + 1}-${e.$y}`);
+        }}
+        format="DD-MM-YYYY"
+        label={innerText}
+        sx={{ "&.MuiFormControl-root": { width: "100%", margin: "10px 0" } }}
+      />
     </div>
   );
 };

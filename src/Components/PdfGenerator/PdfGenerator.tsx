@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     maxWidth: "100%",
+    maxHeight: "100%",
   },
   section: {
     margin: 10,
@@ -72,17 +73,19 @@ const styles = StyleSheet.create({
   textDesription: { margin: "10px 0px", fontSize: 12 },
 });
 // Create Document Component
-const DocumentGenerator = () => {
+const PdfGenerator = () => {
   const wholeWeekMenu = useAppSelector(
     (state) => state.menu.weekDaysWithItsLaunchTimes,
   );
+  const dateFromMenu = useAppSelector((state) => state.settings.menuFromDate);
+  const dateToMenu = useAppSelector((state) => state.settings.menuToDate);
   // @ts-ignore
   return (
     <PDFViewer style={{ width: "100%" }}>
-      <Document>
+      <Document title={"Πρόγραμμα-Διατροφής"}>
         <Page size="A4" orientation={"landscape"} style={styles.page}>
           <Text>
-            ΠΡΟΓΡΑΜΜΑ ΤΡΟΦΟΔΟΣΙΑΣ ΚΟΙΝΟ ΑΠΟ: {} ΕΩΣ: {}
+            ΠΡΟΓΡΑΜΜΑ ΤΡΟΦΟΔΟΣΙΑΣ ΚΟΙΝΟ ΑΠΟ: {dateFromMenu} ΕΩΣ: {dateToMenu}
           </Text>
           <View style={{ width: "95%" }}>
             <View style={styles.outerrDivOfTheDays}>
@@ -129,30 +132,29 @@ const DocumentGenerator = () => {
                         {returnNameOfDayInGreek(day)}
                       </Text>
                       <Text style={styles.textDay}>ΠΡΩΙΝΟ{"\n"}ΔΕΚΑΤΙΑΝΟ</Text>
-                      {Object.keys(wholeWeekMenu[day]["breakfast"]).map(
-                        (recipe) => (
-                          <Text style={styles.textDesription}>{recipe} </Text>
-                        ),
-                      )}
+                      <Text style={styles.textDesription}>
+                        {Object.keys(wholeWeekMenu[day]["breakfast"]).map(
+                          (recipe) => recipe + "\n",
+                        )}
+                      </Text>
                       <Text style={styles.textDay}>ΓΕΥΜΑ</Text>
-
-                      {Object.keys(wholeWeekMenu[day]["launch"]).map(
-                        (recipe) => (
-                          <Text style={styles.textDesription}> </Text>
-                        ),
-                      )}
+                      <Text style={styles.textDesription}>
+                        {Object.keys(wholeWeekMenu[day]["launch"]).map(
+                          (recipe) => recipe + "\n",
+                        )}
+                      </Text>
                       <Text style={styles.textDay}>ΑΠΟΓ/ΤΙΝΟ</Text>
-                      {Object.keys(wholeWeekMenu[day]["snack"]).map(
-                        (recipe) => (
-                          <Text style={styles.textDesription}>{recipe} </Text>
-                        ),
-                      )}
+                      <Text style={styles.textDesription}>
+                        {Object.keys(wholeWeekMenu[day]["snack"]).map(
+                          (recipe) => recipe + "\n",
+                        )}
+                      </Text>
                       <Text style={styles.textDay}>ΒΡΑΔΙΝΟ</Text>
-                      {Object.keys(wholeWeekMenu[day]["dinner"]).map(
-                        (recipe) => (
-                          <Text style={styles.textDesription}>{recipe} </Text>
-                        ),
-                      )}
+                      <Text style={styles.textDesription}>
+                        {Object.keys(wholeWeekMenu[day]["dinner"]).map(
+                          (recipe) => recipe + "\n",
+                        )}
+                      </Text>
                     </View>
                   ),
                 )}
@@ -165,4 +167,4 @@ const DocumentGenerator = () => {
   );
 };
 
-export default DocumentGenerator;
+export default PdfGenerator;

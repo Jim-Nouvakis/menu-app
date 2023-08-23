@@ -11,13 +11,19 @@ import { useAppSelector } from "./app/hooks";
 import { useDispatch } from "react-redux";
 import { parseMenu, setWeeklyMenu } from "./features/foodMenu/foodMenu-slice";
 import foods from "./foods.json";
-import DocumentGenerator from "./Components/DocumentGenerator/DocumentGenerator";
+import PdfGenerator from "./Components/PdfGenerator/PdfGenerator";
+import {
+  setDateFromRange,
+  setDateToRange,
+} from "./features/settings/settings-slice";
 
 function App() {
   const isSettingsDashboardVisible = useAppSelector(
     (state) => state.settings.isVisible,
   );
-
+  const isPdfGeneratorVisible = useAppSelector(
+    (state) => state.pdfGenerator.isVisible,
+  );
   const getWeeklyMenuFromLocalStorage = async () => {
     const localStorageMenu = await localStorage.getItem("weeklyMenu");
     if (localStorageMenu) {
@@ -25,19 +31,30 @@ function App() {
     }
   };
 
+  const getDatesFromLocalStorage = async () => {
+    const localStorageFromDate = await localStorage.getItem("dateFrom");
+    const localStorageToDate = await localStorage.getItem("dateTo");
+
+    if (localStorageFromDate && localStorageToDate) {
+      dispatch(setDateToRange(localStorageToDate));
+      dispatch(setDateFromRange(localStorageFromDate));
+    }
+  };
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(parseMenu(foods));
     getWeeklyMenuFromLocalStorage();
+    getDatesFromLocalStorage();
   }, []);
   return (
     <LocalizationProvider adapterLocale="el" dateAdapter={AdapterDayjs}>
       <div className={"App"}>
-        {/*<Dashboard />*/}
-        {/*{isSettingsDashboardVisible && <SettingsDashboard />}*/}
-        {/*<ModalWrapper />*/}
-        {/*{!isSettingsDashboardVisible && <ToggleSettingsMenuButton />}*/}
-        <DocumentGenerator />
+        {!isPdfGeneratorVisible && <Dashboard />}
+        {isSettingsDashboardVisible && <SettingsDashboard />}
+        <ModalWrapper />
+        {isPdfGeneratorVisible && <PdfGenerator />}
+        {!isSettingsDashboardVisible && <ToggleSettingsMenuButton />}
       </div>
     </LocalizationProvider>
   );

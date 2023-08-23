@@ -32,18 +32,20 @@ export default function ConstructNewObjectWithTheTotalOfAllIngredientsOfTheDayOr
         ).map((ing) => {
           if (ing in newObj) {
             //@ts-ignore
-            newObj[ing] +=
+            newObj[ing] += parseFloat(
               //@ts-ignore
               weekDaysWithItsMenus[selectedDayToGetTotalsOfIngredients][launch][
                 recipe
-              ][ing];
+              ][ing],
+            );
           } else {
             //@ts-ignore
-            newObj[ing] =
+            newObj[ing] = parseFloat(
               //@ts-ignore
               weekDaysWithItsMenus[selectedDayToGetTotalsOfIngredients][launch][
                 recipe
-              ][ing];
+              ][ing],
+            );
           }
         });
       }),

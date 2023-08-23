@@ -6,7 +6,7 @@ interface FoodMenuState {
     numberOfPeople: number;
     daySelected: string | null;
   };
-  menu: { Ροφήματα: { Καφέδες: {} } };
+  menu: {};
   weekDaysWithItsLaunchTimes: {
     Monday: { breakfast: {}; launch: {}; snack: {}; dinner: {} };
     Tuesday: { breakfast: {}; launch: {}; snack: {}; dinner: {} };
@@ -26,7 +26,7 @@ interface FoodMenuState {
 
 const initialState: FoodMenuState = {
   settingsForMenu: { numberOfPeople: 15, daySelected: null },
-  menu: { Ροφήματα: { Καφέδες: {} } },
+  menu: {},
   weekDaysWithItsLaunchTimes: {
     Monday: { breakfast: {}, launch: {}, snack: {}, dinner: {} },
     Tuesday: { breakfast: {}, launch: {}, snack: {}, dinner: {} },
@@ -45,7 +45,7 @@ const foodMenuSlice = createSlice({
   name: "FoodMenu",
   initialState,
   reducers: {
-    parseMenu(state, action: PayloadAction<{ Ροφήματα: { Καφέδες: {} } }>) {
+    parseMenu(state, action: PayloadAction<{}>) {
       state.menu = action.payload;
     },
     addFoodToDayAndTime(
